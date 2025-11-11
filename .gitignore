@@ -1,0 +1,7 @@
+# Ignore data checkpoints and cache
+__pycache__/
+.ipynb_checkpoints/
+*.pkl
+*.csv
+*.png
+.DS_Store
