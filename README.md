@@ -15,7 +15,7 @@ customer-churn-prediction/
 ## 🧠 Steps
 1. EDA
 2. Feature Engineering
-3. Modeling
+3. Modeling (Logistic Regression, Gradient Boosting, Random Forest, XGBoost)
 4. Evaluation & ROI
 
 ## 💡 Key Business Insights:
