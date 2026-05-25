@@ -1,6 +1,12 @@
 # Customer Churn Prediction
 
-Predicting telecom customer churn using machine learning, with end-to-end analysis from EDA to business ROI.
+> End-to-end machine learning system for telecom customer churn — from exploratory analysis to business ROI, with an interactive Streamlit demo.
+
+![Python](https://img.shields.io/badge/Python-3.9%2B-blue?logo=python&logoColor=white)
+![scikit-learn](https://img.shields.io/badge/scikit--learn-ML-orange?logo=scikitlearn&logoColor=white)
+![XGBoost](https://img.shields.io/badge/XGBoost-gradient%20boosting-red)
+![Streamlit](https://img.shields.io/badge/Streamlit-demo-ff4b4b?logo=streamlit&logoColor=white)
+![SHAP](https://img.shields.io/badge/SHAP-explainability-blueviolet)
 
 **Dataset:** [Telco Customer Churn — Kaggle](https://www.kaggle.com/datasets/blastchar/telco-customer-churn)  
 **Author:** Papimon Kongnark
@@ -9,7 +15,27 @@ Predicting telecom customer churn using machine learning, with end-to-end analys
 
 ## Overview
 
-This project builds a churn prediction system for a telecom company using the IBM Telco dataset (7,032 customers, 26.6% churn rate). The pipeline covers exploratory data analysis, feature engineering, model training with class imbalance handling (SMOTE), threshold optimization, and business ROI quantification.
+This project builds a production-ready churn prediction system for a telecom company using the IBM Telco dataset (7,032 customers, 26.6% churn rate).
+
+The pipeline covers:
+- Exploratory data analysis with business-relevant insights
+- Feature engineering and class imbalance handling (SMOTE)
+- Multi-model comparison with threshold optimization
+- Business ROI quantification ($222,400 net savings)
+- SHAP explainability for stakeholder transparency
+- Interactive Streamlit demo for real-time prediction
+
+---
+
+## Live Demo
+
+Run the Streamlit app locally to predict churn for individual customers in real time:
+
+```bash
+streamlit run streamlit/app.py
+```
+
+Input customer tenure, monthly charges, and contract type — the model returns a churn probability with a visual risk indicator.
 
 ---
 
@@ -18,16 +44,20 @@ This project builds a churn prediction system for a telecom company using the IB
 ```
 customer-churn-prediction/
 ├── data/
-│   └── Telco_Customer_Churn.csv
+│   └── Telco_Customer_Churn.csv        # IBM Telco dataset (7,032 rows)
 ├── notebooks/
-│   └── customer_churn.ipynb     # Full pipeline: EDA → modeling → business impact
+│   ├── customer_churn.ipynb            # Full pipeline: EDA → modeling → business impact
+│   ├── best_churn_model.pkl            # Saved Gradient Boosting model
+│   └── scaler.pkl                      # Fitted StandardScaler
+├── streamlit/
+│   └── app.py                          # Interactive churn prediction demo
 ├── requirements.txt
 └── README.md
 ```
 
 ---
 
-## Pipeline
+## ML Pipeline
 
 | Step | Description |
 |------|-------------|
@@ -42,7 +72,7 @@ customer-churn-prediction/
 
 ## Model Results
 
-All models trained on SMOTE-resampled data (train/test split 80/20, stratified).
+All models trained on SMOTE-resampled data (80/20 stratified train/test split).
 
 | Model | CV AUC | Test AUC | Avg Precision |
 |-------|--------|----------|---------------|
@@ -69,15 +99,15 @@ Assumptions: ARPU = $65/month, retention period = 24 months, retention cost = $5
 
 | Metric | Value |
 |--------|-------|
-| Optimal threshold | 0.100 |
+| Optimal threshold | 0.10 |
 | Customers correctly identified as at-risk | 267 / 374 |
 | Net savings vs. doing nothing | **$222,400** |
 | ROI on retention investment | **71.4%** |
 | Cost of False Positives (wasted spend) | $44,200 |
 | Cost of False Negatives (missed churners) | $214,000 |
-| Profit gain from threshold tuning (0.5 → 0.1) | +$27,600 |
+| Profit gain from threshold tuning (0.5 → 0.1) | **+$27,600** |
 
-> Lowering the decision threshold from 0.5 to 0.1 significantly increases recall for at-risk customers, reducing missed revenue at the expense of a modest increase in wasted retention spend — the net effect is a $27,600 improvement in profitability.
+> Lowering the decision threshold from 0.5 to 0.1 increases recall for at-risk customers significantly. The net effect is a **$27,600 improvement in profitability** by catching more churners at the cost of modest additional retention spend.
 
 ---
 
@@ -97,12 +127,20 @@ Assumptions: ARPU = $65/month, retention period = 24 months, retention cost = $5
 ## Setup
 
 ```bash
+# Clone the repo
+git clone https://github.com/<your-username>/customer-churn-prediction.git
+cd customer-churn-prediction
+
+# Install dependencies
 pip install -r requirements.txt
+
+# Run the Streamlit demo
+streamlit run streamlit/app.py
 ```
 
-**Requirements:** `pandas`, `numpy`, `matplotlib`, `seaborn`, `scikit-learn`, `xgboost`, `imbalanced-learn`, `joblib`
+Open `notebooks/customer_churn.ipynb` to run the full training pipeline.
 
-Open `notebooks/customer_churn.ipynb` to run the full pipeline.
+**Requirements:** `pandas`, `numpy`, `matplotlib`, `seaborn`, `scikit-learn`, `xgboost`, `imbalanced-learn`, `shap`, `joblib`, `streamlit`
 
 ---
 
@@ -110,7 +148,7 @@ Open `notebooks/customer_churn.ipynb` to run the full pipeline.
 
 ## Next Steps
 
-- Hyperparameter tuning with Optuna
-- Stacking / ensemble models
-- REST API deployment with FastAPI
-- Business dashboard with Streamlit
+- [ ] Hyperparameter tuning with Optuna
+- [ ] Stacking / ensemble models
+- [ ] REST API deployment with FastAPI
+- [ ] Full-featured Streamlit dashboard with SHAP explanations per prediction
