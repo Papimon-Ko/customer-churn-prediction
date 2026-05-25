@@ -36,6 +36,7 @@ customer-churn-prediction/
 | 3. Model Training | Logistic Regression, Random Forest, XGBoost, Gradient Boosting |
 | 4. Evaluation | ROC-AUC, Precision-Recall, threshold sensitivity analysis |
 | 5. Business Impact | ROI calculation, net benefit, waterfall chart |
+| 6. SHAP Explainability | Global feature importance (bar, beeswarm), local waterfall, dependence plots |
 
 ---
 

@@ -6,3 +6,6 @@ scikit-learn
 xgboost
 imblearn
 joblib
+shap
+streamlit
+imbalanced-learn
