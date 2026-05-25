@@ -106,6 +106,8 @@ Open `notebooks/customer_churn.ipynb` to run the full pipeline.
 
 ---
 
+<img width="1366" height="641" alt="image" src="https://github.com/user-attachments/assets/06953668-3a34-4413-92c0-4d5f45cf9c54" />
+
 ## Next Steps
 
 - Hyperparameter tuning with Optuna
